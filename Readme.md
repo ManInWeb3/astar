@@ -1,33 +1,3 @@
-#
-
-sudo -s
-apt update;apt dist-upgrade -y; apt install tmux mc nano jq wireguard python3-pip
-
-pip install --user -U wg-meshconf
-
-
-wg-meshconf addpeer relay --address 10.1.0.1/16 --endpoint 152.42.168.231
-wg-meshconf addpeer para --address 10.2.0.1/16 --endpoint 152.42.224.160
-wg-meshconf addpeer rpc1 --address 10.3.0.1/16 --endpoint 167.172.67.163
-wg-meshconf addpeer rpc2 --address 10.4.0.1/16 --endpoint 188.166.216.212
-wg-meshconf addpeer lb --address 10.5.0.1/16 --endpoint 188.166.219.135
-
-sudo apt update
-sudo apt dist-upgrade -y
-sudo apt install -y tmux mc nano jq wireguard
-sudo mv /home/astar-admin/*.conf /etc/wireguard/wg0.conf
-sudo systemctl enable --now wg-quick@wg0
-systemctl status wg-quick@wg0.service
-
-## Download bin
-
-curl -Lo /usr/local/bin/polkadot https://github.com/paritytech/polkadot-sdk/releases/download/polkadot-v1.12.0/polkadot
-curl -Lo /usr/local/bin/polkadot-execute-worker https://github.com/paritytech/polkadot-sdk/releases/download/polkadot-v1.12.0/polkadot-execute-worker
-curl -Lo /usr/local/bin/polkadot-prepare-worker https://github.com/paritytech/polkadot-sdk/releases/download/polkadot-v1.12.0/polkadot-prepare-worker
-https://github.com/AstarNetwork/Astar/releases/download/v5.39.1/astar-collator-v5.39.1-ubuntu-x86_64.tar.gz
-
-useradd --no-create-home --shell /usr/sbin/nologin astar
-
 # Run relay chain
 ## 1. Build chain specs
 
