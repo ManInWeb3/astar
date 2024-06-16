@@ -1,0 +1,25 @@
+[Unit]
+Description=Validator Alice
+
+[Service]
+User=astar
+Group=astar
+  
+ExecStart=/usr/local/bin/polkadot \
+--alice \
+--validator \
+--base-path /data/alice \
+--chain /data/rococo-local-raw.json \
+--public-addr /ip4/10.1.0.1/tcp/30333 \
+--listen-addr /ip4/10.1.0.1/tcp/30333 \
+--rpc-port 9944 \
+--prometheus-port 9615
+
+StandardOutput=append:/data/validator-alice.log
+StandardError=append:/data/validator-alice.log
+
+Restart=always
+RestartSec=120
+
+[Install]
+WantedBy=multi-user.target

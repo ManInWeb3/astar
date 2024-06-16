@@ -1,0 +1,37 @@
+[Unit]
+Description=Collator Bob
+
+[Service]
+User=astar
+Group=astar
+
+ExecStart=/usr/local/bin/astar-collator \
+--bob \
+--collator \
+--force-authoring \
+--chain /data/astar-dev-raw.json \
+--base-path /data/bob \
+--bootnodes /ip4/10.2.0.1/tcp/40333/p2p/12D3KooWK1xiW6GuyfRuNGJN4th6UcECAjkjhxCu4PGqFGSJ6dM9 \
+--listen-addr /ip4/10.2.0.1/tcp/40334 \
+--public-addr /ip4/10.2.0.1/tcp/40334 \
+--rpc-port 8845 \
+--prometheus-port 9617 \
+--prometheus-external \
+--telemetry-url 'wss://telemetry.polkadot.io/submit/ 0' \
+  --pruning archive \
+  --trie-cache-size 0 \
+--execution wasm \
+-- \
+--chain /data/rococo-local-raw.json \
+--listen-addr /ip4/10.2.0.1/tcp/30344 \
+--public-addr /ip4/10.2.0.1/tcp/30344 \
+--rpc-port 9978
+
+StandardOutput=append:/data/collator-bob.log
+StandardError=append:/data/collator-bob.log
+
+Restart=always
+RestartSec=120
+
+[Install]
+WantedBy=multi-user.target

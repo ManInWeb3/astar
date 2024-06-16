@@ -1,0 +1,25 @@
+[Unit]
+Description=Validator Bob
+
+[Service]
+User=astar
+Group=astar
+  
+ExecStart=/usr/local/bin/polkadot \
+--bob \
+--validator \
+--base-path /data/bob \
+--chain /data/rococo-local-raw.json \
+--public-addr /ip4/10.1.0.1/tcp/30334 \
+--listen-addr /ip4/10.1.0.1/tcp/30334 \
+--rpc-port 9945 \
+--prometheus-port 9616
+
+StandardOutput=append:/data/validator-bob.log
+StandardError=append:/data/validator-bob.log
+
+Restart=always
+RestartSec=120
+
+[Install]
+WantedBy=multi-user.target

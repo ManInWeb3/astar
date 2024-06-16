@@ -1,0 +1,36 @@
+[Unit]
+Description=Collator Alice
+
+[Service]
+User=astar
+Group=astar
+
+ExecStart=/usr/local/bin/astar-collator \
+--alice \
+--collator \
+--force-authoring \
+--chain /data/astar-dev-raw.json \
+--base-path /data/alice \
+--public-addr /ip4/10.2.0.1/tcp/40333 \
+--listen-addr /ip4/10.2.0.1/tcp/40333 \
+--rpc-port 8844 \
+--prometheus-port 9615 \
+--prometheus-external \
+--telemetry-url "wss://telemetry.polkadot.io/submit/ 0" \
+  --pruning archive \
+  --trie-cache-size 0 \
+--execution wasm \
+-- \
+--chain /data/rococo-local-raw.json \
+--public-addr /ip4/10.2.0.1/tcp/30343 \
+--listen-addr /ip4/10.2.0.1/tcp/30343 \
+--rpc-port 9977
+
+StandardOutput=append:/data/collator-alice.log
+StandardError=append:/data/collator-alice.log
+
+Restart=always
+RestartSec=120
+
+[Install]
+WantedBy=multi-user.target
